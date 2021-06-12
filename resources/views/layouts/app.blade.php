@@ -8,9 +8,12 @@
         <title>{{config('app.name', 'TT2')}}</title>
     </head>
     <body>
-        @include('inc.navbar')
         <div class="container">
-            @yield('content')
+            @include('inc.navbar')
+            <br>
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
     </body>
 </html>
