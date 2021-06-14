@@ -26,6 +26,12 @@ Route::get('/tvshows', [PagesController::class, 'tvshows']);
 
 Route::resource('/cinema' , CinemaController::class);
 
+Route::post('/cinema/create', array('uses' => 'App\Http\Controllers\CinemaController@store'));
+
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

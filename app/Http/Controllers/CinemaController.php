@@ -37,7 +37,33 @@ class CinemaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'type'=>'required',
+            'title'=>'required',
+            'genre'=>'required',
+            'release_date'=>'required',
+            // 'file_path'=>'required',
+        ]);
+        // if ($request->hasFile('file_path')) {
+
+        //     $request->validate([
+        //         'file_path' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+        //     ]);
+
+        //     // Save the file locally in the storage/public/ folder under a new folder named /product
+        //     $request->file->store('product', 'public');
+        // }
+        
+        //create cinema
+        $cinema = new Cinema;
+        $cinema->type = $request->input('type');
+        $cinema->title = $request->input('title');
+        $cinema->genre = $request->input('genre');
+        $cinema->release_date = $request->input('release_date');
+        // $cinema->file_path = $request->file->hashName();
+        $cinema->save();
+
+        return redirect('/cinema')->with('success','Cinema added');
     }
 
     /**
@@ -60,7 +86,8 @@ class CinemaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cinema = Cinema::find($id);
+        return view('cinema.edit')->with('cinema',$cinema);
     }
 
     /**
@@ -72,7 +99,33 @@ class CinemaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'type'=>'required',
+            'title'=>'required',
+            'genre'=>'required',
+            'release_date'=>'required',
+            // 'file_path'=>'required',
+        ]);
+        // if ($request->hasFile('file_path')) {
+
+        //     $request->validate([
+        //         'file_path' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+        //     ]);
+
+        //     // Save the file locally in the storage/public/ folder under a new folder named /product
+        //     $request->file->store('product', 'public');
+        // }
+        
+        //create cinema
+        $cinema = Cinema::find($id);
+        $cinema->type = $request->input('type');
+        $cinema->title = $request->input('title');
+        $cinema->genre = $request->input('genre');
+        $cinema->release_date = $request->input('release_date');
+        // $cinema->file_path = $request->file->hashName();
+        $cinema->save();
+
+        return redirect('/cinema')->with('success','Cinema updated');
     }
 
     /**
@@ -83,6 +136,9 @@ class CinemaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cinema = Cinema::find($id);
+        $cinema->delete();
+        return redirect('/cinema')->with('success','Cinema deleted');
+
     }
 }
