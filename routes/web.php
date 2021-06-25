@@ -21,10 +21,14 @@ use App\Http\Controllers\MovieController;
 // });
 
 Route::get('/', [PagesController::class, 'index']);
-Route::get('/movies', [PagesController::class, 'movies']);
-Route::get('/tvshows', [PagesController::class, 'tvshows']);
+
+// Route::get('/movies', [PagesController::class, 'movies']);
+// Route::get('/tvshows', [PagesController::class, 'tvshows']);
 
 Route::resource('/cinema' , MovieController::class);
+
+Route::get('/movies' , 'App\Http\Controllers\MovieController@showMovies');
+Route::get('/tvshows' , 'App\Http\Controllers\MovieController@showTvshows');
 
 Route::post('/cinema/create', array('uses' => 'App\Http\Controllers\MovieController@store'));
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Edit cinema</h1>
+    <h1>Edit</h1>
     {!! Form::open(['action' => ['App\Http\Controllers\MovieController@update',$movie->id], 'files' => true, 'method' => 'POST']) !!}
         <div class="form-group">
             {{Form::select('type', ['movie' => 'Movie', 'tvshow' => 'TV-Show'], $movie->type, ['placeholder' => 'Choose a type'])}}

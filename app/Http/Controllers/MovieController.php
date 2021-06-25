@@ -12,10 +12,22 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function showMovies()
+    {
+        $movies = Movie::all()->where('type', 'movie')->sortBy('release_date');
+        return view('cinema.movies')->with('movies',$movies);
+    }
+
+    public function showTvshows()
+    {
+        $movies = Movie::all()->where('type', 'tvshow')->sortBy('release_date');
+        return view('cinema.tvshows')->with('movies',$movies);
+    }
+
     public function index()
     {
         $movies = Movie::all()->sortBy('release_date');
-        // $movies = Cinema::all()->where('type', 'movies');
         return view('cinema.index')->with('movies',$movies);
     }
 

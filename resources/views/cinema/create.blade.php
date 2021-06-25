@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Add cinema</h1>
+    <h1>Create</h1>
     {!! Form::open(['action' => 'App\Http\Controllers\MovieController@store', 'files' => true, 'method' => 'POST']) !!}
         <div class="form-group">
             {{Form::select('type', ['movie' => 'Movie', 'tvshow' => 'TV-Show'], null, ['placeholder' => 'Choose a type'])}}
