@@ -45,15 +45,19 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/tvshows">TV-Shows</a>
             </li>
+          </ul>
+          @auth
+          @if (Auth::user()->is_admin == 1)
+          <ul class="nav navbar-nav navbar-right">
             <li class="nav-item active">
                 <a class="nav-link" href="/cinema">Cinema</a>
             </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
             <li class="nav-item active">
                 <a class="nav-link" href="/cinema/create">Create</a>
             </li>
-          </ul>
+           </ul>
+           @endif
+           @endauth
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
               <!-- Authentication Links -->
