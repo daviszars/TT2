@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Cinema;
+use App\Models\Movie;
 
-class CinemaController extends Controller
+class MovieController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class CinemaController extends Controller
      */
     public function index()
     {
-        $cinemas = Cinema::all()->sortBy('release_date');
+        $movies = Movie::all()->sortBy('release_date');
         // $movies = Cinema::all()->where('type', 'movies');
-        return view('cinema.index')->with('cinemas',$cinemas);
+        return view('cinema.index')->with('movies',$movies);
     }
 
     /**
@@ -42,26 +42,17 @@ class CinemaController extends Controller
             'title'=>'required',
             'genre'=>'required',
             'release_date'=>'required',
-            // 'file_path'=>'required',
+            'file_path'=>'required|url',
         ]);
-        // if ($request->hasFile('file_path')) {
-
-        //     $request->validate([
-        //         'file_path' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
-        //     ]);
-
-        //     // Save the file locally in the storage/public/ folder under a new folder named /product
-        //     $request->file->store('product', 'public');
-        // }
         
         //create cinema
-        $cinema = new Cinema;
-        $cinema->type = $request->input('type');
-        $cinema->title = $request->input('title');
-        $cinema->genre = $request->input('genre');
-        $cinema->release_date = $request->input('release_date');
-        // $cinema->file_path = $request->file->hashName();
-        $cinema->save();
+        $movie = new Movie;
+        $movie->type = $request->input('type');
+        $movie->title = $request->input('title');
+        $movie->genre = $request->input('genre');
+        $movie->release_date = $request->input('release_date');
+        $movie->file_path = $request->input('file_path');
+        $movie->save();
 
         return redirect('/cinema')->with('success','Cinema added');
     }
@@ -74,8 +65,8 @@ class CinemaController extends Controller
      */
     public function show($id)
     {
-        $cinema = Cinema::find($id);
-        return view('cinema.show')->with('cinema',$cinema);
+        $movie = Movie::find($id);
+        return view('cinema.show')->with('movie',$movie);
     }
 
     /**
@@ -86,8 +77,8 @@ class CinemaController extends Controller
      */
     public function edit($id)
     {
-        $cinema = Cinema::find($id);
-        return view('cinema.edit')->with('cinema',$cinema);
+        $movie = Movie::find($id);
+        return view('cinema.edit')->with('movie',$movie);
     }
 
     /**
@@ -104,26 +95,17 @@ class CinemaController extends Controller
             'title'=>'required',
             'genre'=>'required',
             'release_date'=>'required',
-            // 'file_path'=>'required',
+            'file_path'=>'required',
         ]);
-        // if ($request->hasFile('file_path')) {
-
-        //     $request->validate([
-        //         'file_path' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
-        //     ]);
-
-        //     // Save the file locally in the storage/public/ folder under a new folder named /product
-        //     $request->file->store('product', 'public');
-        // }
         
         //create cinema
-        $cinema = Cinema::find($id);
-        $cinema->type = $request->input('type');
-        $cinema->title = $request->input('title');
-        $cinema->genre = $request->input('genre');
-        $cinema->release_date = $request->input('release_date');
-        // $cinema->file_path = $request->file->hashName();
-        $cinema->save();
+        $movie = Movie::find($id);
+        $movie->type = $request->input('type');
+        $movie->title = $request->input('title');
+        $movie->genre = $request->input('genre');
+        $movie->release_date = $request->input('release_date');
+        $movie->file_path = $request->input('file_path');
+        $movie->save();
 
         return redirect('/cinema')->with('success','Cinema updated');
     }
@@ -136,8 +118,8 @@ class CinemaController extends Controller
      */
     public function destroy($id)
     {
-        $cinema = Cinema::find($id);
-        $cinema->delete();
+        $movie = Movie::find($id);
+        $movie->delete();
         return redirect('/cinema')->with('success','Cinema deleted');
 
     }

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
-use App\Http\Controllers\CinemaController;
+use App\Http\Controllers\MovieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,13 +24,9 @@ Route::get('/', [PagesController::class, 'index']);
 Route::get('/movies', [PagesController::class, 'movies']);
 Route::get('/tvshows', [PagesController::class, 'tvshows']);
 
-Route::resource('/cinema' , CinemaController::class);
+Route::resource('/cinema' , MovieController::class);
 
-Route::post('/cinema/create', array('uses' => 'App\Http\Controllers\CinemaController@store'));
-
-Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/cinema/create', array('uses' => 'App\Http\Controllers\MovieController@store'));
 
 Auth::routes();
 
