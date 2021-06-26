@@ -15,7 +15,7 @@ class Movie extends Model
     //primary key
     public $primaryKey = 'id';
 
-    public function user() {
-        return $this->hasMany('App\User');
-    }
+    // public function user() {
+    //     return $this->hasMany('App\User');
+    // }
 }

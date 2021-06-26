@@ -32,8 +32,8 @@ Route::get('/', [PagesController::class, 'index']);
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'is_admin'], function() {
         Route::resource('cinema', MovieController::class, ['only' => [
-            'edit', 'create', 'store', 'update', 'destroy'
-        ]]);
+            'edit', 'create', 'store', 'update', 'destroy']]);
+    });
 });
 
 Route::resource('cinema', MovieController::class, ['except' => [
@@ -46,5 +46,3 @@ Route::get('/tvshows' , 'App\Http\Controllers\MovieController@showTvshows');
 // Route::post('/cinema/create', array('uses' => 'App\Http\Controllers\MovieController@store'));
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-});

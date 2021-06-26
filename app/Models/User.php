@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function cinemas() {
-        return $this->hasMany('App\Cinema');
-    }
+    // public function cinemas() {
+    //     return $this->hasMany('App\Cinema');
+    // }
 }

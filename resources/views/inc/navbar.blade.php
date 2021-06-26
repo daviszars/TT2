@@ -47,7 +47,7 @@
             </li>
           </ul>
           @auth
-          @if (Auth::user()->is_admin == 1)
+          @if (auth()->user()->is_admin)
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item active">
                 <a class="nav-link" href="/cinema">Cinema</a>
