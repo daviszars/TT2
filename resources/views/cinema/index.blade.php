@@ -1,14 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Cinema</h1>
-    @if(count($movies) > 0)
-        @foreach($movies as $movie)
+    <h1>Your schedule</h1>
+    @guest
+        <div class="jumbotron text-center">
+            <p>
+                <h1>Login to view</h1>
+                <br>
+                <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a> 
+                <a class="btn btn-success btn-lg" href="/register" role="button">Register</a>
+            </p>
+        </div>
+    @endguest
+    @auth
+    @foreach($movies as $movie)
+        @if($movie->followedBy(auth()->user()))
             <div class="card card-body bg-light">
                 <div class="row">
                     <div class="col-10">
                         <h3><a href="/cinema/{{$movie->id}}">{{$movie->title}}</a></h3>
-                        <small>Release date {{$movie->release_date}}</small>
+                        <h5>Release date {{$movie->release_date}}</h5>
                     </div>
                     <div class="col-2">
                         @auth
@@ -27,10 +38,8 @@
                         @endauth
                     </div>
                 </div>
-                <span>{{ $movie->follows->count()}} {{Str::plural('follower', $movie->follows->count())}}</span>
             </div>
-        @endforeach
-    @else 
-        <p>No movies to show :(</p>
-    @endif
+        @endif
+    @endforeach
+    @endauth
 @endsection

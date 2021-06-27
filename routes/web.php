@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PagesController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\MovieFollowController;
 
@@ -23,12 +22,7 @@ use App\Http\Controllers\MovieFollowController;
 
 Auth::routes();
 
-Route::get('/', [PagesController::class, 'index']);
-
-// Route::get('/movies', [PagesController::class, 'movies']);
-// Route::get('/tvshows', [PagesController::class, 'tvshows']);
-
-// Route::resource('/cinema' , MovieController::class);
+Route::get('/', [MovieController::class, 'index']);
 
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'is_admin'], function() {
@@ -41,12 +35,10 @@ Route::resource('cinema', MovieController::class, ['except' => [
     'edit', 'create', 'store', 'update', 'destroy'
 ]]);
 
-Route::get('/movies' , 'App\Http\Controllers\MovieController@showMovies');
-Route::get('/tvshows' , 'App\Http\Controllers\MovieController@showTvshows');
+Route::get('/movies' , [MovieController::class, 'showMovies']);
+Route::get('/tvshows' , [MovieController::class, 'showTvshows']);
 
 Route::post('/cinema/{movie}/follows', [MovieFollowController::class, 'store'])->name('movies.follows');
 Route::delete('/cinema/{movie}/follows', [MovieFollowController::class, 'destroy'])->name('movies.follows');
-
-// Route::post('/cinema/create', array('uses' => 'App\Http\Controllers\MovieController@store'));
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

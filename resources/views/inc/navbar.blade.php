@@ -37,9 +37,6 @@
           <!-- Left Side Of Navbar -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/home">Home</a>
-            </li>
-            <li class="nav-item active">
               <a class="nav-link" href="/movies">Movies</a>
             </li>
             <li class="nav-item active">
@@ -49,9 +46,6 @@
           @auth
           @if (auth()->user()->is_admin)
           <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item active">
-                <a class="nav-link" href="/cinema">Cinema</a>
-            </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/cinema/create">Create</a>
             </li>
