@@ -9,7 +9,7 @@
             <h5>{{__('messages.release date')}}: {{$movie->release_date}}</h5>
           </div>
           <div class="col-8">
-            <img src={{$movie->file_path}} alt="Cinema Poster" style="width:300px;height:450px;">
+            <img src="/storage/poster_images/{{$movie->poster_image}}" alt="Cinema Poster" style="width:300px;height:450px;">
           </div>
         </div>
     </div>

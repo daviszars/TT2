@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use Illuminate\Support\Facades\Storage;
 
 class MovieController extends Controller
 {
@@ -54,8 +55,23 @@ class MovieController extends Controller
             'title'=>'required',
             'genre'=>'required',
             'release_date'=>'required',
-            'file_path'=>'required|url',
+            'poster_image'=>'required|image|max:1999',
         ]);
+
+        if($request->hasFile('poster_image')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('poster_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('poster_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('poster_image')->storeAs('public/poster_images', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
         
         //create cinema
         $movie = new Movie;
@@ -63,7 +79,7 @@ class MovieController extends Controller
         $movie->title = $request->input('title');
         $movie->genre = $request->input('genre');
         $movie->release_date = $request->input('release_date');
-        $movie->file_path = $request->input('file_path');
+        $movie->poster_image = $fileNameToStore;
         $movie->save();
 
         return redirect('/cinema')->with('success',trans('messages.cinema added'));
@@ -107,16 +123,34 @@ class MovieController extends Controller
             'title'=>'required',
             'genre'=>'required',
             'release_date'=>'required',
-            'file_path'=>'required',
+            'poster_image'=>'nullable|image|max:1999',
         ]);
         
-        //create cinema
         $movie = Movie::find($id);
+
+        if($request->hasFile('poster_image')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('poster_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('poster_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('poster_image')->storeAs('public/poster_images', $fileNameToStore);
+
+            Storage::delete('public/poster_images/'.$movie->poster_image);
+        }
+
+        //create cinema
         $movie->type = $request->input('type');
         $movie->title = $request->input('title');
         $movie->genre = $request->input('genre');
         $movie->release_date = $request->input('release_date');
-        $movie->file_path = $request->input('file_path');
+        if($request->hasFile('poster_image')){
+            $movie->poster_image = $fileNameToStore;
+        }
         $movie->save();
 
         return redirect('/cinema')->with('success',trans('messages.cinema updated'));
@@ -131,8 +165,13 @@ class MovieController extends Controller
     public function destroy($id)
     {
         $movie = Movie::find($id);
+
+        if($movie->poster_image != 'noimage.jpg'){
+            // Delete Image
+            Storage::delete('public/poster_images/'.$movie->cover_image);
+        }
+
         $movie->delete();
         return redirect('/cinema')->with('success',trans('messages.cinema deleted'));
-
     }
 }
