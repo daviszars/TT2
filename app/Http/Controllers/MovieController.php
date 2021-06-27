@@ -168,7 +168,7 @@ class MovieController extends Controller
 
         if($movie->poster_image != 'noimage.jpg'){
             // Delete Image
-            Storage::delete('public/poster_images/'.$movie->cover_image);
+            Storage::delete('public/poster_images/'.$movie->poster_image);
         }
 
         $movie->delete();
