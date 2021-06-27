@@ -45,4 +45,8 @@ class User extends Authenticatable
     // public function cinemas() {
     //     return $this->hasMany('App\Cinema');
     // }
+
+    public function follows(){
+        return $this->hasMany(Follow::class);
+    }
 }

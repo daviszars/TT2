@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\MovieFollowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,9 @@ Route::resource('cinema', MovieController::class, ['except' => [
 
 Route::get('/movies' , 'App\Http\Controllers\MovieController@showMovies');
 Route::get('/tvshows' , 'App\Http\Controllers\MovieController@showTvshows');
+
+Route::post('/cinema/{movie}/follows', [MovieFollowController::class, 'store'])->name('movies.follows');
+Route::delete('/cinema/{movie}/follows', [MovieFollowController::class, 'destroy'])->name('movies.follows');
 
 // Route::post('/cinema/create', array('uses' => 'App\Http\Controllers\MovieController@store'));
 

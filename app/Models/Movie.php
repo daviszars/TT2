@@ -15,7 +15,15 @@ class Movie extends Model
     //primary key
     public $primaryKey = 'id';
 
+    public function followedBy(User $user){
+        return $this->follows->contains('user_id', $user->id);
+    }
+
     // public function user() {
     //     return $this->hasMany('App\User');
     // }
+
+    public function follows(){
+        return $this->hasMany(Follow::class);
+    }
 }
