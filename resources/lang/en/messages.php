@@ -34,13 +34,8 @@ return [
     'reset password' => 'Reset password',
     'send password reset link' => 'Send password reset link',
     'following' => 'following',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    'cinema added' => 'cinema added',
+    'cinema updated' => 'cinema updated',
+    'cinema deleted' => 'cinema deleted',
 
 ];

@@ -34,13 +34,8 @@ return [
     'reset password' => 'Atjaunināt paroli',
     'send password reset link' => 'Nosūtīt paroles atjaunināšanas saiti',
     'following' => 'seko',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    'cinema added' => 'kino pievienots',
+    'cinema updated' => 'kino izmainīts',
+    'cinema deleted' => 'kino izdzēsts',
 
 ];

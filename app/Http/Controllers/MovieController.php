@@ -66,7 +66,7 @@ class MovieController extends Controller
         $movie->file_path = $request->input('file_path');
         $movie->save();
 
-        return redirect('/cinema')->with('success','Cinema added');
+        return redirect('/cinema')->with('success',trans('messages.cinema added'));
     }
 
     /**
@@ -119,7 +119,7 @@ class MovieController extends Controller
         $movie->file_path = $request->input('file_path');
         $movie->save();
 
-        return redirect('/cinema')->with('success','Cinema updated');
+        return redirect('/cinema')->with('success',trans('messages.cinema updated'));
     }
 
     /**
@@ -132,7 +132,7 @@ class MovieController extends Controller
     {
         $movie = Movie::find($id);
         $movie->delete();
-        return redirect('/cinema')->with('success','Cinema deleted');
+        return redirect('/cinema')->with('success',trans('messages.cinema deleted'));
 
     }
 }
