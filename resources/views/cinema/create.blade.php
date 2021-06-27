@@ -1,26 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create</h1>
+    <h1>{{__('messages.create')}}</h1>
     {!! Form::open(['action' => 'App\Http\Controllers\MovieController@store', 'files' => true, 'method' => 'POST']) !!}
         <div class="form-group">
-            {{Form::select('type', ['movie' => 'Movie', 'tvshow' => 'TV-Show'], null, ['placeholder' => 'Choose a type'])}}
+            {{Form::select('type', ['movie' => trans('messages.movies'), 'tvshow' => trans('messages.tvshows')], null, ['placeholder' => trans('messages.choose a type')])}}
         </div>
         <div class="form-group">
-            {{Form::label('title','Title')}}
-            {{Form::text('title','',['class'=>'form-control','placeholder'=>'Title'])}}
+            {{Form::label('title',trans('messages.title'))}}
+            {{Form::text('title','',['class'=>'form-control','placeholder'=>trans('messages.title')])}}
         </div>
         <div class="form-group">
-            {{Form::label('genre','Genre')}}
-            {{Form::text('genre','',['class'=>'form-control','placeholder'=>'Genre'])}}
+            {{Form::label('genre',trans('messages.genre'))}}
+            {{Form::text('genre','',['class'=>'form-control','placeholder'=>trans('messages.genre')])}}
         </div>
         <div class="form-group">
-            {{Form::label('file_path','Poster image link')}}
-            {{Form::text('file_path','',['class'=>'form-control','placeholder'=>'Link to image'])}}
+            {{Form::label('file_path',trans('messages.poster image link'))}}
+            {{Form::text('file_path','',['class'=>'form-control','placeholder'=>trans('messages.link to image')])}}
         </div>
         <div class="form-group">
             {{Form::date('release_date', \Carbon\Carbon::now())}}
         </div>
-        {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+        {{Form::submit(trans('messages.submit'), ['class'=>'btn btn-primary'])}}
     {!! Form::close() !!}
 @endsection

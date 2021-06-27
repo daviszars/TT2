@@ -37,17 +37,17 @@
           <!-- Left Side Of Navbar -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/movies">Movies</a>
+              <a class="nav-link" href="/movies">{{__('messages.movies')}}</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/tvshows">TV-Shows</a>
+                <a class="nav-link" href="/tvshows">{{__('messages.tvshows')}}</a>
             </li>
           </ul>
           @auth
           @if (auth()->user()->is_admin)
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item active">
-                <a class="nav-link" href="/cinema/create">Create</a>
+                <a class="nav-link" href="/cinema/create">{{__('messages.create')}}</a>
             </li>
            </ul>
            @endif
@@ -58,13 +58,13 @@
               @guest
                   @if (Route::has('login'))
                       <li class="nav-item">
-                          <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                          <a class="nav-link" href="{{ route('login') }}">{{__('messages.login')}}</a>
                       </li>
                   @endif
 
                   @if (Route::has('register'))
                       <li class="nav-item">
-                          <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                          <a class="nav-link" href="{{ route('register') }}">{{__('messages.register')}}</a>
                       </li>
                   @endif
               @else
@@ -77,7 +77,7 @@
                           <a class="dropdown-item" href="{{ route('logout') }}"
                              onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();">
-                              {{ __('Logout') }}
+                              {{ __('messages.logout') }}
                           </a>
 
                           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -86,6 +86,20 @@
                       </div>
                   </li>
               @endguest
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="flag-icon flag-icon-{{Config::get('languages')[App::getLocale()]['flag-icon']}}"></span> {{ Config::get('languages')[App::getLocale()]['display'] }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                @foreach (Config::get('languages') as $lang => $language)
+                    @if ($lang != App::getLocale())
+                            <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"><span class="flag-icon flag-icon-{{$language['flag-icon']}}"></span> {{$language['display']}}</a>
+                    @endif
+                @endforeach
+                </div>
+              </li>
+
           </ul>
       </div>
   </div>
