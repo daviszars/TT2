@@ -47,8 +47,7 @@
         ],
         "post-install-cmd": [
             "php artisan clear-compiled",
-            "chmod -R 775 public/",
-            "php artisan migrate:fresh --seed"
+            "chmod -R 775 public/"
         ]
     },
     "extra": {
